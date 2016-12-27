@@ -52,5 +52,14 @@ public class WordCounterShould {
 		assertWordCount(wordcountMap, "word", 1);
 		assertWordCount(wordcountMap, "count", 1);
 	}
+	
+	@Test
+	public void return_count_1_for_3_different_words_with_space(){
+		Map<String, Integer> wordcountMap = wordCounter.countWords("word count exercise");
+		assertMapSize(wordcountMap, 3);
+		assertWordCount(wordcountMap, "word", 1);
+		assertWordCount(wordcountMap, "count", 1);
+		assertWordCount(wordcountMap, "exercise", 1);
+	}
 
 }
