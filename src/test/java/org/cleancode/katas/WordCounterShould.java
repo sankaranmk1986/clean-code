@@ -1,13 +1,11 @@
 package org.cleancode.katas;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
-import static org.hamcrest.CoreMatchers.is;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class WordCounterShould {
