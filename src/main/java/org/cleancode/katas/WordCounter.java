@@ -1,7 +1,10 @@
 package org.cleancode.katas;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WordCounter {
 
@@ -9,9 +12,7 @@ public class WordCounter {
 		if(word.isEmpty()){
 			return new HashMap<String, Integer>();
 		}
-		Map<String, Integer> wordcountMap = new HashMap<>();
-		wordcountMap.put(word, 1);
-		return wordcountMap;
+		return Stream.of(word).map(w->w.split(" ")).flatMap(Arrays::stream).collect(Collectors.toMap(w->w, w->1));
 	}
 
 }
