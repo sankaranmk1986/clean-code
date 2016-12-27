@@ -28,5 +28,12 @@ public class WordCounterShould {
 		Map<String, Integer> wordCountMap = wordCounter.countWords("");
 		assertThat(wordCountMap.size(), is(0));
 	}
+	
+	@Test
+	public void return_count_1_for_word_without_space(){
+		Map<String, Integer> wordcountMap = wordCounter.countWords("word");
+		assertThat(wordcountMap.size(), is(1));
+		assertThat(wordcountMap.get("word"), is(1));
+	}
 
 }
