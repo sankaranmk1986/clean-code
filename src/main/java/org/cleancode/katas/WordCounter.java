@@ -16,5 +16,12 @@ public class WordCounter {
 		}
 		return Stream.of(word).map(w->w.split(" ")).flatMap(Arrays::stream).collect(groupingBy(w->w, summingInt(w->1)));
 	}
+
+	public Map<String, Integer> countWords(String word, String delimeter) {	
+		if(word.isEmpty()){
+			return new HashMap<String, Integer>();
+		}
+		return Stream.of(word).map(w->w.split("\\"+delimeter)).flatMap(Arrays::stream).collect(groupingBy(w->w, summingInt(w->1)));
+	}
 	
 }
