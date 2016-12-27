@@ -17,6 +17,10 @@ public class WordCounterShould {
 	public void setup() {
 		wordCounter = new WordCounter();
 	}
+
+	private void assertMapSize(Map<String, Integer> wordCountMap, int expectedSize) {
+		assertThat(wordCountMap.size(), is(expectedSize));
+	}
 	
 	@Test
 	public void able_to_create_wordcounter_object(){
@@ -25,14 +29,13 @@ public class WordCounterShould {
 	
 	@Test
 	public void return_emptymap_for_empty_string(){
-		Map<String, Integer> wordCountMap = wordCounter.countWords("");
-		assertThat(wordCountMap.size(), is(0));
+		assertMapSize( wordCounter.countWords(""), 0);
 	}
 	
 	@Test
 	public void return_count_1_for_word_without_space(){
 		Map<String, Integer> wordcountMap = wordCounter.countWords("word");
-		assertThat(wordcountMap.size(), is(1));
+		assertMapSize(wordcountMap, 1);
 		assertThat(wordcountMap.get("word"), is(1));
 	}
 
