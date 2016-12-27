@@ -9,12 +9,11 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class WordCounter {
+	
+	private final String DEFAULT_DELIMETER = " ";
 
-	public Map<String, Integer> countWords(String word) {	
-		if(word.isEmpty()){
-			return new HashMap<String, Integer>();
-		}
-		return Stream.of(word).map(w->w.split(" ")).flatMap(Arrays::stream).collect(groupingBy(w->w, summingInt(w->1)));
+	public Map<String, Integer> countWords(String word) {
+		return countWords(word, DEFAULT_DELIMETER);
 	}
 
 	public Map<String, Integer> countWords(String word, String delimeter) {	
