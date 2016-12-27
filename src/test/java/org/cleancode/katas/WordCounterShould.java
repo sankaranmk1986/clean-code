@@ -61,5 +61,12 @@ public class WordCounterShould {
 		assertWordCount(wordcountMap, "count", 1);
 		assertWordCount(wordcountMap, "exercise", 1);
 	}
+	
+	@Test
+	public void return_count_2_for_repeated_word(){
+		Map<String, Integer> wordcountMap = wordCounter.countWords("word word");
+		assertMapSize(wordcountMap, 1);
+		assertWordCount(wordcountMap, "word", 2);
+	}
 
 }
