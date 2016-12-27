@@ -1,9 +1,11 @@
 package org.cleancode.katas;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCounter {
@@ -12,7 +14,7 @@ public class WordCounter {
 		if(word.isEmpty()){
 			return new HashMap<String, Integer>();
 		}
-		return Stream.of(word).map(w->w.split(" ")).flatMap(Arrays::stream).collect(Collectors.toMap(w->w, w->1));
+		return Stream.of(word).map(w->w.split(" ")).flatMap(Arrays::stream).collect(groupingBy(w->w, summingInt(w->1)));
 	}
-
+	
 }
