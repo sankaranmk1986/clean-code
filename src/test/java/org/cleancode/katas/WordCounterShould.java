@@ -83,5 +83,14 @@ public class WordCounterShould {
 		assertWordCount(wordcountMap, "word", 1);
 		assertWordCount(wordcountMap, "count", 1);
 	}
+	
+	@Test
+	public void return_count_for_3_different_words_with_delimeter(){
+		Map<String, Integer> wordcountMap = wordCounter.countWords("word%count%exercise%word%word", "%");
+		assertMapSize(wordcountMap, 3);
+		assertWordCount(wordcountMap, "word", 3);
+		assertWordCount(wordcountMap, "count", 1);
+		assertWordCount(wordcountMap, "exercise", 1);
+	}
 
 }
