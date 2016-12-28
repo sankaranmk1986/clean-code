@@ -21,8 +21,13 @@ public class NumberToWordsShould {
 	}
 	
 	@Test
-	public void return_two_for_number_1(){
+	public void return_two_for_number_2(){
 		assertThat(numberToWords.convertToWords(2),is("TWO"));
+	}
+	
+	@Test
+	public void return_three_for_number_3(){
+		assertThat(numberToWords.convertToWords(3),is("THREE"));
 	}
 
 }
