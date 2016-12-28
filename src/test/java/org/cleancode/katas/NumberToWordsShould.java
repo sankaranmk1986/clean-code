@@ -54,4 +54,9 @@ public class NumberToWordsShould {
 	public void return_onehundred_for_number_100(){
 		assertThat(numberToWords.convertToWords(100),is("ONE HUNDRED"));
 	}
+	
+	@Test
+	public void return_onehundredandone_for_number_101(){
+		assertThat(numberToWords.convertToWords(101),is("ONE HUNDRED AND ONE"));
+	}
 }
