@@ -9,17 +9,15 @@ public class TensProcessor implements NumberProcessor {
 	private OnesProcessor onesProcessor = new OnesProcessor();
 	
 	public String convertToWord(int number){
-		StringBuilder wordBuilder = new StringBuilder();		
-		if(number >= 100){
-			number = number%100;	
-			appendRequiredString(number, wordBuilder);
-		}
-		wordBuilder.append(convertTensToWord(number));
+		StringBuilder wordBuilder = new StringBuilder();
+		appendRequiredString(number%1000, wordBuilder);
+		wordBuilder.append(convertTensToWord(number%100));
 		return wordBuilder.append(onesProcessor.convertToWord(number)).toString();
 	}
 
-	private void appendRequiredString(int number, StringBuilder wordBuilder) {
-		if(number>0){
+	private void appendRequiredString(int number, StringBuilder wordBuilder) {	
+		int remainder = number%100;
+		if(number > 100 && remainder>0){		
 			wordBuilder.append(AND_WITH_SPACE);
 		}
 	}

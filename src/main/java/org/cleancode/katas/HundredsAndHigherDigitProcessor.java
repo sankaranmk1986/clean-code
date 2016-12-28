@@ -16,7 +16,6 @@ public class HundredsAndHigherDigitProcessor implements NumberProcessor {
 		StringBuilder wordBuilder = new StringBuilder();
 		if(number >= 1000){	
 			wordBuilder.append(convertFirstDigitToWords(number/1000, THOUSAND));
-			number=number%1000;
 			thousandFound=true;
 		}	
 		convertHundredsToWord(number, thousandFound, wordBuilder);
@@ -24,10 +23,13 @@ public class HundredsAndHigherDigitProcessor implements NumberProcessor {
 	}
 
 	private void convertHundredsToWord(int number, boolean thousandFound, StringBuilder wordBuilder) {
-		if(number >= 100){
-			if(thousandFound){
+		if(thousandFound){
+			number=number%1000;
+			if(number >= 100){
 				wordBuilder.append(" ");
-			}
+			}			
+		}
+		if(number >= 100){			
 			wordBuilder.append(convertFirstDigitToWords(number/100, HUNDRED));
 		}
 	}
