@@ -1,14 +1,15 @@
 package org.cleancode.katas;
 
+import static java.util.stream.Stream.of;
+
 public class NumberToWords {
 
 	public String convertToWords(int number) {
-		if(number==2){
-			return "TWO";
-		}else if(number==3){
-			return "THREE";
-		}
-		return "ONE";
+		return of(ONES.values())
+				.filter(ones -> ones.getNumber() ==number)
+				.findFirst()
+				.get()
+				.name();
 	}
 
 }
