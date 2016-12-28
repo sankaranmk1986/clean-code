@@ -6,10 +6,15 @@ public class NumberToWords {
 
 	public String convertToWords(int number) {
 		StringBuilder wordBuilder = new StringBuilder();
-		if(number >= 20){
-			wordBuilder.append("TWENTY ");
+		if(number == 30){
+			wordBuilder.append("THIRTY");
+		}else {
+			if(number >= 20){
+				wordBuilder.append("TWENTY ");
+			}
+			wordBuilder.append(convertOnesToWord(number%20));
 		}
-		return wordBuilder.append(convertOnesToWord(number%20)).toString();
+		return wordBuilder.toString();
 	}
 	
 	private String convertOnesToWord(int number){
