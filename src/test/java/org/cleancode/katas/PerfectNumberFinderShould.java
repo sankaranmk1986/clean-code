@@ -1,15 +1,44 @@
 package org.cleancode.katas;
 
-import static org.junit.Assert.assertFalse;
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(value = Parameterized.class)
 public class PerfectNumberFinderShould {
 	
 	private PerfectNumberFinder perfectNumberFinder;
+	private int number;
+	private boolean result;
+	
+	public PerfectNumberFinderShould(int number, boolean result){
+		this.number=number;
+		this.result=result;
+	}
+	
+	 @Parameters(name = "return_{1}_for_number_{0}()")
+	  public static Collection<Object[]> data() {
+	    return asList(new Object[][] {
+	        {1, false},
+	        {2, false},
+	        {6, true},
+	        {10, false},
+	        {28, true},
+	        {495, false},
+	        {496, true},
+	        {8127, false},
+	        {8128, true}
+	    });
+	  }
 	
 	@Before
 	public void setup(){
@@ -23,19 +52,8 @@ public class PerfectNumberFinderShould {
 	}
 	
 	@Test
-	public void return_false_for_nonperfect_number(){
-		assertFalse(perfectNumberFinder.isPerfectNumber(1));
-		assertFalse(perfectNumberFinder.isPerfectNumber(10));
-		assertFalse(perfectNumberFinder.isPerfectNumber(495));
-		assertFalse(perfectNumberFinder.isPerfectNumber(8127));
+	public void find_given_number_is_a_perfect_number(){
+		Assert.assertThat(perfectNumberFinder.isPerfectNumber(number), is(result));
 	}
-	
-	@Test
-	public void return_true_for_perfect_number(){
-		assertTrue(perfectNumberFinder.isPerfectNumber(6));
-		assertTrue(perfectNumberFinder.isPerfectNumber(28));
-		assertTrue(perfectNumberFinder.isPerfectNumber(496));
-		assertTrue(perfectNumberFinder.isPerfectNumber(8128));
-	}	
 	
 }
