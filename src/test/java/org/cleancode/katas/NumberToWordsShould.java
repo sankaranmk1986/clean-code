@@ -76,7 +76,12 @@ public class NumberToWordsShould {
 	}
 	
 	@Test
-	public void return_onethousandone_for_number_1101(){
+	public void return_onethousand_onehundred_and_one_for_number_1101(){
 		assertThat(numberToWords.convertToWords(1101),is("ONE THOUSAND ONE HUNDRED AND ONE"));
+	}
+	
+	@Test
+	public void return_ninethousand_ninehundred_and_ninety_nine_for_number_9999(){
+		assertThat(numberToWords.convertToWords(9999),is("NINE THOUSAND NINE HUNDRED AND NINETY NINE"));
 	}
 }
