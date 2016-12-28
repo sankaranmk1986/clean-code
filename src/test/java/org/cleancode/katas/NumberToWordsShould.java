@@ -11,5 +11,10 @@ public class NumberToWordsShould {
 	public void return_one_for_number_1(){
 		assertThat(new NumberToWords().convertToWords(1),is("ONE"));
 	}
+	
+	@Test
+	public void return_two_for_number_1(){
+		assertThat(new NumberToWords().convertToWords(2),is("TWO"));
+	}
 
 }
