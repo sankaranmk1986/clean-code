@@ -2,7 +2,7 @@ package org.cleancode.katas;
 
 import static java.util.stream.Stream.of;
 
-public class OnesProcessor {
+public class OnesProcessor implements NumberProcessor {
 
 	public String convertToWord(int number) {
 		boolean tensFound=false;
