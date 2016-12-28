@@ -28,13 +28,9 @@ public class PerfectNumberFinderShould {
 	}
 	
 	@Test
-	public void return_true_for_number_6(){
+	public void return_true_for_perfect_number(){
 		assertTrue(perfectNumberFinder.isPerfectNumber(6));
-	}
-	
-	@Test
-	public void return_true_for_number_28(){
 		assertTrue(perfectNumberFinder.isPerfectNumber(28));
-	}
+	}	
 	
 }
