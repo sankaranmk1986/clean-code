@@ -32,4 +32,9 @@ public class PerfectNumberFinderShould {
 		assertTrue(perfectNumberFinder.isPerfectNumber(6));
 	}
 	
+	@Test
+	public void return_true_for_number_28(){
+		assertTrue(perfectNumberFinder.isPerfectNumber(28));
+	}
+	
 }
