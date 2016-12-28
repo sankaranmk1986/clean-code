@@ -23,14 +23,19 @@ public class PerfectNumberFinderShould {
 	}
 	
 	@Test
-	public void return_false_for_number_1(){
+	public void return_false_for_nonperfect_number(){
 		assertFalse(perfectNumberFinder.isPerfectNumber(1));
+		assertFalse(perfectNumberFinder.isPerfectNumber(10));
+		assertFalse(perfectNumberFinder.isPerfectNumber(495));
+		assertFalse(perfectNumberFinder.isPerfectNumber(8127));
 	}
 	
 	@Test
 	public void return_true_for_perfect_number(){
 		assertTrue(perfectNumberFinder.isPerfectNumber(6));
 		assertTrue(perfectNumberFinder.isPerfectNumber(28));
+		assertTrue(perfectNumberFinder.isPerfectNumber(496));
+		assertTrue(perfectNumberFinder.isPerfectNumber(8128));
 	}	
 	
 }
