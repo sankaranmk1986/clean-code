@@ -29,5 +29,10 @@ public class NumberToWordsShould {
 	public void return_three_for_number_3(){
 		assertThat(numberToWords.convertToWords(3),is("THREE"));
 	}
+	
+	@Test
+	public void return_nineteen_for_number_19(){
+		assertThat(numberToWords.convertToWords(19),is("NINETEEN"));
+	}
 
 }
