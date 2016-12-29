@@ -2,9 +2,9 @@ package org.cleancode.katas;
 
 public class NumberToWords {
 	
-	private NumberProcessor numberProcessor = new HundredsAndHigherDigitProcessor();
+	private NumberProcessorContext processorContext = new NumberProcessorContext();
 	
 	public String convertToWords(int number) {	
-		return numberProcessor.convertToWord(number);
+		return processorContext.convertToWord(number);
 	}
 }
