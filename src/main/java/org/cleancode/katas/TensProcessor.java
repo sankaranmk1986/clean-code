@@ -6,6 +6,7 @@ public class TensProcessor implements NumberProcessor {
 
 	private OnesProcessor onesProcessor = new OnesProcessor();
 
+	@Override
 	public String convertToWord(int number) {
 		StringBuilder wordBuilder = new StringBuilder();
 		convertTensToWord(number % 100, wordBuilder);

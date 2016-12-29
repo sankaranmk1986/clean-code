@@ -4,6 +4,7 @@ import static java.util.stream.Stream.of;
 
 public class OnesProcessor implements NumberProcessor {
 
+	@Override
 	public String convertToWord(int number) {
 		if (number >= 20) {
 			number = number % 10;
