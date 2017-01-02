@@ -33,11 +33,18 @@ public class ProductShould {
 	  public static Collection<Object[]> dataWithDiscount() {
 		Map<Integer, Integer> discountDetails = new HashMap<>();
 		discountDetails.put(3, 130);
+		Map<Integer, Integer> discountDetailsForB = new HashMap<>();
+		discountDetailsForB.put(2, 45);
 	    return asList(new Object[][] {
 	        {"A", 50, 1, 50,discountDetails},
 	        {"A", 50, 2,100,discountDetails},	       
 	        {"A", 50, 3, 130,discountDetails},
-	        {"A", 50, 4, 180,discountDetails}
+	        {"A", 50, 4, 180,discountDetails},
+	        {"A", 50, 6, 260,discountDetails},
+	        {"A", 50, 7, 310,discountDetails},
+	        {"B", 30, 1, 30,discountDetailsForB},
+	        {"B", 30, 2, 45,discountDetailsForB},
+	        {"B", 30, 3, 75,discountDetailsForB}
 	      });
 	  }
 
