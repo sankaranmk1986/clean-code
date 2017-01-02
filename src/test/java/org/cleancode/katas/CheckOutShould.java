@@ -37,5 +37,10 @@ public class CheckOutShould {
 		assertThat(checkOut.price("B"), is(30));		
 	}
 	
+	@Test
+	public void return_80_if_AB_product_added(){
+		assertThat(checkOut.price("AB"), is(80));		
+	}
+	
 
 }
