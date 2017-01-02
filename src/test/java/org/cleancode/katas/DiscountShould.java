@@ -22,11 +22,15 @@ public class DiscountShould {
 		this.discountedPrice=discountedPrice;
 	}
 	
-	 @Parameters(name = "return_{1}_for_items_{0}()")
+	 @Parameters(name = "return_{3}_for_items_{2}()")
 	  public static Collection<Object[]> data() {
 	    return asList(new Object[][] {
 	        {3, 130,3, 130},
-	        {3, 130, 4,130}	        
+	        {3, 130, 4,130},	
+	        {3, 130, 6,260},
+	        {2, 45, 1,0},
+	        {2, 45, 2,45},
+	        {2, 45, 4,90}
 	      });
 	  }
 	
