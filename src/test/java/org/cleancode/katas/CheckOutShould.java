@@ -34,6 +34,7 @@ public class CheckOutShould {
 	        {"AB", 80},
 	        {"ABA", 130},
 	        {"AAA", 130},
+	        {"AAAA", 180},
 	      });
 	  }
 	
