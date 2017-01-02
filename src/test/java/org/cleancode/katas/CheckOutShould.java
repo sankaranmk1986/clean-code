@@ -24,5 +24,11 @@ public class CheckOutShould {
 	public void return_50_if_A_product_added(){
 		assertThat(checkOut.price("A"), is(50));		
 	}
+	
+	@Test
+	public void return_30_if_B_product_added(){
+		assertThat(checkOut.price("B"), is(30));		
+	}
+	
 
 }
