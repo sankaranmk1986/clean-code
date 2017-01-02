@@ -38,7 +38,7 @@ public class Product {
 	}
 	
 	public int calculatePrice(int count){
-		return price;
+		return price*count;
 	}
 	
 	
