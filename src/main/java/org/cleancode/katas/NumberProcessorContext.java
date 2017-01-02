@@ -20,7 +20,7 @@ public class NumberProcessorContext {
 	}
 	
 	private NumberProcessor getNumberProcessor(int number){
-		int length = (int)(log10(1000)+1);
+		int length = (int)(log10(number)+1);
 		if(length > 3){
 			length=3;
 		}
