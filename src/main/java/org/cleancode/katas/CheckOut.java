@@ -1,5 +1,7 @@
 package org.cleancode.katas;
 
+import static java.lang.String.valueOf;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,11 @@ public class CheckOut {
 		if(products == null || products.isEmpty()){
 			return 0;
 		}
-		return itemPriceMap.get(products);
+		return calculatePrice(products);
+	}
+
+	private int calculatePrice(String products) {
+		return products.chars().map(product -> itemPriceMap.get(valueOf((char)product))).sum();
 	}
 
 	public void setItemPriceMap(Map<String, Integer> itemPriceMap) {
