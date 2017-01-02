@@ -1,14 +1,20 @@
 package org.cleancode.katas;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CheckOut {
+	
+	private Map<String, Integer> itemPriceMap = new HashMap<>();
 
 	public int price(String products) {
-		if(products.equalsIgnoreCase("A")){
-			return 50;
-		}else if(products.equalsIgnoreCase("B")){
-			return 30;
+		if(products == null || products.isEmpty()){
+			return 0;
 		}
-		return 0;
+		return itemPriceMap.get(products);
 	}
 
+	public void setItemPriceMap(Map<String, Integer> itemPriceMap) {
+		this.itemPriceMap = itemPriceMap;
+	}
 }
