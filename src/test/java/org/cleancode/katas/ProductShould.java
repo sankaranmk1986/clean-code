@@ -36,7 +36,8 @@ public class ProductShould {
 	    return asList(new Object[][] {
 	        {"A", 50, 1, 50,discountDetails},
 	        {"A", 50, 2,100,discountDetails},	       
-	        {"A", 50, 3, 130,discountDetails}
+	        {"A", 50, 3, 130,discountDetails},
+	        {"A", 50, 4, 180,discountDetails}
 	      });
 	  }
 
