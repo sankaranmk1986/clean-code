@@ -38,8 +38,39 @@ public class Product {
 	}
 	
 	public int calculatePrice(int count){
-		return price*count;
+		return isDiscountAvailable(count)?calculateDiscountedPrice(count):calculateActualPrice(count);
 	}
 	
+	private boolean isDiscountAvailable(int count){
+		return discount == null ? false:
+				discount.stream()
+				.filter(discount -> count >= discount.getCountRequired())
+				.findFirst()
+				.isPresent();
+	}
+	
+	private int calculateDiscountedPrice(int count){
+		return calculateDiscountedPrice(count,availableDiscount(count));		
+	}
+	
+	private Discount availableDiscount(int count) {
+		return discount.stream()
+				.filter(discount -> count >= discount.getCountRequired())
+				.findFirst()
+				.get();
+	}	
+	
+	private int calculateDiscountedPrice(int count, Discount availableDiscount){
+		return availableDiscount.calculateDiscountedPrice(count)
+				+calculateActualPrice(discountNotEligibleProductCount(count, availableDiscount));
+	}
+		
+	private int calculateActualPrice(Integer count){
+		return count*price;
+	}
+	
+	private int discountNotEligibleProductCount(int count, Discount availableDiscount) {
+		return count-availableDiscount.discountEligibleProductCount(count);
+	}
 	
 }

@@ -18,10 +18,14 @@ public class Discount {
 	}
 	
 	public int calculateDiscountedPrice(int count){
-		return discountedPrice*discountEligibleProductCount(count);
+		return discountedPrice*getCountOfDiscountedUnits(count);
 	}
 
-	public int discountEligibleProductCount(int count) {
+	public int getCountOfDiscountedUnits(int count) {
 		return (int)(count/countRequired);
+	}
+	
+	public int discountEligibleProductCount(int count) {
+		return getCountOfDiscountedUnits(count)*countRequired;
 	}
 }
