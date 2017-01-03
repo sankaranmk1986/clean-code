@@ -21,6 +21,14 @@ public class CheckOut {
 		}
 		return calculatePrice(products);
 	}
+	
+	public void addToCart(String products){
+		
+	}
+	
+	public int total(){
+		return 50;
+	}
 
 	private int calculatePrice(String products) {
 		Map<String, Integer> productCountMap = countProducts(products);
