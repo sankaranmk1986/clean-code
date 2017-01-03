@@ -3,14 +3,13 @@ package org.cleancode.katas;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toMap;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CheckOut {
 	
-	private Map<String, Product> productNameMap = new HashMap<>();
+	private Map<String, Product> productNameMap;
 
 	public CheckOut(List<Product> availableProducts) {
 		productNameMap = availableProducts.stream().collect(Collectors.toMap(Product::getProductName, product->product));

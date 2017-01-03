@@ -35,7 +35,11 @@ public class CheckOutShould {
 	        {"ABA", 130},
 	        {"AAA", 130},
 	        {"AAAA", 180},
-	        {"BB", 45}
+	        {"BB", 45},
+	        {"CDBA",115},
+	        {"BABAA",175},
+	        {"AAAAAA",260},
+	        {"DABABA",190}
 	      });
 	  }
 	
@@ -48,6 +52,8 @@ public class CheckOutShould {
 		discounts = new ArrayList<>();
 		discounts.add(new Discount(2, 45));
 		products.add(new Product("B", 30, discounts));
+		products.add(new Product("C", 20));
+		products.add(new Product("D", 15));
 		checkOut = new CheckOut(products);
 	}
 	
