@@ -33,7 +33,7 @@ public class CheckOut {
 	}
 
 	private void addMultipleItemsToCart(String products) {
-		asList(products.split("")).stream().forEach(product ->{cart.add(product);});
+		asList(products.split("")).stream().forEach(product ->{addToCart(product);});
 	}
 
 }
