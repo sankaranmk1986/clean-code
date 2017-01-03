@@ -85,6 +85,13 @@ public class CheckOutShould {
 		    return asList(new Object[][] {
 		        {asList("A"), 50},
 		        {asList("A","A"), 100},
+		        {asList("A","A", "A"), 130},
+		        {asList("A","A", "A", "A"), 180},
+		        {asList("A","B", "C", "D"), 115},
+		        {asList("B","B"), 45},
+		        {asList("A","A","A","B","B"), 175},
+		        {asList("A","A","A","A","A","A"), 260},
+		        {asList("D","A","B","A","B","A"), 190}
 		      });
 		  }
 		
