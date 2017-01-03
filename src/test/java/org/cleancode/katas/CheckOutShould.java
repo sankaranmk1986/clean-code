@@ -90,6 +90,13 @@ public class CheckOutShould {
 			checkOut.addToCart("A");
 			assertThat(checkOut.total(), is(50));
 		}
+		
+		@Test
+		public void return_total_100_for_product_A_added_twice(){
+			checkOut.addToCart("A");
+			checkOut.addToCart("A");
+			assertThat(checkOut.total(), is(100));
+		}
 	}
 
 }
