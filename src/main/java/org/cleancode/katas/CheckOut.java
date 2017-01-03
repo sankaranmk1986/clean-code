@@ -4,11 +4,17 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CheckOut {
 	
-	private Map<String, Integer> itemPriceMap = new HashMap<>();
+	private Map<String, Product> productNameMap = new HashMap<>();
+
+	public CheckOut(List<Product> availableProducts) {
+		productNameMap = availableProducts.stream().collect(Collectors.toMap(Product::getProductName, product->product));
+	}
 
 	public int price(String products) {
 		if(products == null || products.isEmpty()){
@@ -21,31 +27,11 @@ public class CheckOut {
 		Map<String, Integer> productCountMap = countProducts(products);
 		return productCountMap.keySet()
 				.stream()
-				.mapToInt(product -> calculatePrice(productCountMap, product)).sum();
-	}
-
-	private int calculatePrice(Map<String, Integer> productCountMap, String product) {
-		return isDiscountApplicable(productCountMap, product)? 
-				calculateDiscountedPrice(productCountMap, product):calculateActualPrice(productCountMap.get(product),product);
-	}
-
-	private int calculateDiscountedPrice(Map<String, Integer> productCountMap, String product) {
-		return 130+calculateActualPrice(productCountMap.get(product)-3,product);
-	}
-		
-	private int calculateActualPrice(Integer count, String product){
-		return itemPriceMap.get(product)*count;
-	}
-
-	private boolean isDiscountApplicable(Map<String, Integer> productCountMap, String product) {
-		return productCountMap.get(product) >= 3;
+				.mapToInt(product -> productNameMap.get(product).calculatePrice(productCountMap.get(product))).sum();
 	}
 
 	private Map<String, Integer> countProducts(String products) {
 		return asList(products.split("")).stream().collect(toMap(product -> product, product -> 1, Integer::sum));
 	}
 
-	public void setItemPriceMap(Map<String, Integer> itemPriceMap) {
-		this.itemPriceMap = itemPriceMap;
-	}
 }

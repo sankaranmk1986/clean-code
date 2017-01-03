@@ -4,9 +4,9 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,11 +41,14 @@ public class CheckOutShould {
 	
 	@Before
 	public void setup(){
-		checkOut = new CheckOut();
-		Map<String, Integer> itemPriceMap = new HashMap<>();
-		itemPriceMap.put("A", 50);
-		itemPriceMap.put("B", 30);
-		checkOut.setItemPriceMap(itemPriceMap);
+		List<Discount> discounts = new ArrayList<>();
+		discounts.add(new Discount(3, 130));
+		List<Product> products = new ArrayList<Product>();
+		products.add(new Product("A", 50, discounts));
+		discounts = new ArrayList<>();
+		discounts.add(new Discount(2, 45));
+		products.add(new Product("B", 30, discounts));
+		checkOut = new CheckOut(products);
 	}
 	
 	@Test
