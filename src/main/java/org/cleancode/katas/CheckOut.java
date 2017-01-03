@@ -10,8 +10,10 @@ import java.util.stream.Collectors;
 public class CheckOut {
 	
 	private Map<String, Product> productNameMap;
+	private Cart cart;
 
 	public CheckOut(List<Product> availableProducts) {
+		cart = new Cart(availableProducts);
 		productNameMap = availableProducts.stream().collect(Collectors.toMap(Product::getProductName, product->product));
 	}
 
@@ -22,12 +24,12 @@ public class CheckOut {
 		return calculatePrice(products);
 	}
 	
-	public void addToCart(String products){
-		
+	public void addToCart(String product){
+		cart.add(product);
 	}
 	
 	public int total(){
-		return 50;
+		return cart.totalPrice();
 	}
 
 	private int calculatePrice(String products) {
