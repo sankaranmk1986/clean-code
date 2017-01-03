@@ -10,11 +10,8 @@ public class Discount {
 		this.discountedPrice = discountedPrice;
 	}	
 	
-	public int getCountRequired() {
-		return countRequired;
-	}
-	public int getDiscountedPrice() {
-		return discountedPrice;
+	public boolean isEligibleForDiscount(int count){
+		return count >= countRequired;		
 	}
 	
 	public int calculateDiscountedPrice(int count){

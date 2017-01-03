@@ -3,6 +3,10 @@ package org.cleancode.katas;
 import java.util.List;
 
 public class Product {
+
+	private String productName;
+	private int price;
+	private List<Discount> discount;
 	
 	public Product(String productName, int price) {
 		this.productName = productName;
@@ -13,30 +17,11 @@ public class Product {
 		this(productName,price);
 		this.discount = discount;
 	}
-
-	private String productName;
-	private int price;
-	private List<Discount> discount;
 	
 	public String getProductName() {
 		return productName;
 	}
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public List<Discount> getDiscount() {
-		return discount;
-	}
-	public void setDiscount(List<Discount> discount) {
-		this.discount = discount;
-	}
-	
+		
 	public int calculatePrice(int count){
 		return isDiscountAvailable(count)?calculateDiscountedPrice(count):calculateActualPrice(count);
 	}
@@ -44,7 +29,7 @@ public class Product {
 	private boolean isDiscountAvailable(int count){
 		return discount == null ? false:
 				discount.stream()
-				.filter(discount -> count >= discount.getCountRequired())
+				.filter(discount -> discount.isEligibleForDiscount(count))
 				.findFirst()
 				.isPresent();
 	}
@@ -55,7 +40,7 @@ public class Product {
 	
 	private Discount availableDiscount(int count) {
 		return discount.stream()
-				.filter(discount -> count >= discount.getCountRequired())
+				.filter(discount -> discount.isEligibleForDiscount(count))
 				.findFirst()
 				.get();
 	}	
