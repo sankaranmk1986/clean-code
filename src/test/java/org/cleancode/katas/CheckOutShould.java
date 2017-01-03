@@ -67,9 +67,26 @@ public class CheckOutShould {
 		}
 	}
 	
+	@RunWith(value=Parameterized.class)
 	public static class IncrementalCheckOutShould{
 	
 		private CheckOut checkOut;
+		
+		private List<String> products;
+		private int price;
+		
+		public IncrementalCheckOutShould(List<String> products, int price){
+			this.products=products;
+			this.price=price;
+		}
+		
+		 @Parameters(name = "return_{1}_for_items_{0}()")
+		  public static Collection<Object[]> data() {
+		    return asList(new Object[][] {
+		        {asList("A"), 50},
+		        {asList("A","A"), 100},
+		      });
+		  }
 		
 		@Before
 		public void setup(){
@@ -86,17 +103,11 @@ public class CheckOutShould {
 		}
 		
 		@Test
-		public void return_total_50_for_product_A(){
-			checkOut.addToCart("A");
-			assertThat(checkOut.total(), is(50));
+		public void return_total_for_product_added(){
+			products.stream().forEach(product->{checkOut.addToCart(product);});
+			assertThat(checkOut.total(), is(price));
 		}
 		
-		@Test
-		public void return_total_100_for_product_A_added_twice(){
-			checkOut.addToCart("A");
-			checkOut.addToCart("A");
-			assertThat(checkOut.total(), is(100));
-		}
 	}
 
 }
