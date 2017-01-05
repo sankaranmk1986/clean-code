@@ -22,7 +22,9 @@ public class PricingServiceShould {
 		Product productC = new Product("C", 20);
 		pricingService = new PricingService(asList(new Promotion(asList( new ProductPromotionDetails(productA, 1),
 				new ProductPromotionDetails(productB, 1)), 70),
-				new Promotion(asList( new ProductPromotionDetails(productB, 1),	new ProductPromotionDetails(productC, 1)), 45)));
+				new Promotion(asList( new ProductPromotionDetails(productB, 1),	new ProductPromotionDetails(productC, 1)), 45),
+				new Promotion(asList( new ProductPromotionDetails(productA, 3)),130),
+				new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45)));
 	}
 	
 	@Test
@@ -36,14 +38,34 @@ public class PricingServiceShould {
 	}
 	
 	@Test
-	public void return_2_promotions_if_A_2B_C_purchased(){
+	public void return_3_promotions_if_A_2B_C_purchased(){
 		Map<String, Integer> productCountMap = new HashMap<>();
 		productCountMap.put("A", 1);
 		productCountMap.put("B", 2);
 		productCountMap.put("C", 1);
 		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
-		assertThat(promotions.size(), is(2));
-		assertThat(promotions.get(0).getDiscountedPrice()+promotions.get(1).getDiscountedPrice(), is(115));
+		assertThat(promotions.size(), is(3));
+		assertThat(promotions.get(0).getDiscountedPrice()
+				+promotions.get(1).getDiscountedPrice()+promotions.get(2).getDiscountedPrice(), is(160));
+	}
+	
+	@Test
+	public void return_4_promotions_if_3A_2B_C_purchased(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 3);
+		productCountMap.put("B", 2);
+		productCountMap.put("C", 1);
+		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
+		assertThat(promotions.size(), is(4));
+	}
+	
+	@Test
+	public void return_0_promotions_if_A_C_purchased(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 1);
+		productCountMap.put("C", 1);
+		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
+		assertThat(promotions.size(), is(0));
 	}
 
 }
