@@ -1,6 +1,8 @@
 package org.cleancode.katas;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.sort;
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -87,6 +89,32 @@ public class PricingServiceShould {
 		List<List<Promotion>> promotions = pricingService.calculateEligiblePromotionCombinations(productCountMap);
 		assertThat(promotions.size(), is(2));
 		assertThat(promotions.get(0).size() + promotions.get(1).size(), is(3));
+		assertThat(getPromotionsAsString(promotions), is("AB_AB_or_B"));
+	}
+	
+	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
+		StringBuilder productNameCombinationBuilder = new StringBuilder();
+		combinationOfPromotions.stream().forEach(appliedPromotions -> {
+			productNameCombinationBuilder.append(getProductNames(appliedPromotions)).append("or_");
+		});
+		return productNameCombinationBuilder.substring(0, productNameCombinationBuilder.length()-4);
+	}
+
+	private String getProductNames(List<Promotion> appliedPromotions) {
+		StringBuilder productCombinationBuilder = new StringBuilder();
+		List<String> productCombinations = appliedPromotions.stream().map(promotion -> getProductNames(promotion)).collect(toList());
+		sort(productCombinations);
+		productCombinations.stream().forEach(product -> {productCombinationBuilder.append(product).append("_");});
+		return productCombinationBuilder.toString();
+	}
+
+	private String getProductNames(Promotion promotion) {
+		StringBuilder productNameCombinationBuilder = new StringBuilder();
+		List<String> promotionDetails = promotion.getProductDetails().stream().map(
+				productDetails -> productDetails.getProduct().getProductName()).collect(toList());
+		sort(promotionDetails);
+		promotionDetails.stream().forEach(productName -> {productNameCombinationBuilder.append(productName);});
+		return productNameCombinationBuilder.toString();
 	}
 
 }
