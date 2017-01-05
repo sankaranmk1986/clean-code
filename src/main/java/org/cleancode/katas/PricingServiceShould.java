@@ -78,5 +78,15 @@ public class PricingServiceShould {
 		assertThat(promotions.get(0).size(), is(1));
 		assertThat(promotions.get(0).get(0).getDiscountedPrice(), is(70));
 	}
+	
+	@Test
+	public void return_AB_AB_or_BB_as_eligible_combination_if_2A_2B_purchased(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 2);
+		productCountMap.put("B", 2);
+		List<List<Promotion>> promotions = pricingService.calculateEligiblePromotionCombinations(productCountMap);
+		assertThat(promotions.size(), is(2));
+		assertThat(promotions.get(0).size() + promotions.get(1).size(), is(3));
+	}
 
 }
