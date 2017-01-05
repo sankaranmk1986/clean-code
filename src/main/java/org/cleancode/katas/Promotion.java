@@ -5,12 +5,17 @@ import java.util.Map;
 
 public class Promotion {
 	
-	private List<ProductPromotionDetails> productDetails;
+	private List<ProductPromotionDetails> productDetails;	
+
 	private int discountedPrice;
 	
 	public Promotion(List<ProductPromotionDetails> productDetails, int discountedPrice) {
 		this.productDetails = productDetails;
 		this.discountedPrice = discountedPrice;
+	}
+	
+	public List<ProductPromotionDetails> getProductDetails() {
+		return productDetails;
 	}
 		
 	public int getDiscountedPrice() {
