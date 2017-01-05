@@ -35,7 +35,7 @@ public class CheckOutShould {
 		    return asList(new Object[][] {
 		        {"A", 50},
 		        {"B", 30},
-		        {"AB", 80},
+		        {"AB", 70},
 		        {"ABA", 130},
 		        {"AAA", 130},
 		        {"AAAA", 180},
@@ -116,5 +116,5 @@ public class CheckOutShould {
 		}
 		
 	}
-
+	
 }
