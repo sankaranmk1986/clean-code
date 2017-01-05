@@ -1,11 +1,12 @@
 package org.cleancode.katas;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class PromotionShould {
@@ -18,7 +19,16 @@ public class PromotionShould {
 		Map<String, Integer> productCountMap = new HashMap<>();
 		productCountMap.put("A", 1);
 		productCountMap.put("B", 1);
-		Assert.assertTrue(promotion.isEligibleForPromotion(productCountMap));		
+		assertTrue(promotion.isEligibleForPromotion(productCountMap));		
+	}
+	
+	@Test
+	public void return_false_if_product_A_and_B_purchased(){
+		Promotion promotion = new Promotion(asList( new ProductPromotionDetails(productA, 2), new ProductPromotionDetails(productB, 1)), 110);
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 1);
+		productCountMap.put("B", 1);
+		assertFalse(promotion.isEligibleForPromotion(productCountMap));		
 	}
 
 }
