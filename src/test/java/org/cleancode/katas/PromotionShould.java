@@ -30,5 +30,14 @@ public class PromotionShould {
 		productCountMap.put("B", 1);
 		assertFalse(promotion.isEligibleForPromotion(productCountMap));		
 	}
+	
+	@Test
+	public void return_true_if_product_4_A_and_2_B_purchased(){
+		Promotion promotion = new Promotion(asList( new ProductPromotionDetails(productA, 2), new ProductPromotionDetails(productB, 1)), 110);
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 4);
+		productCountMap.put("B", 2);
+		assertTrue(promotion.isEligibleForPromotion(productCountMap));		
+	}
 
 }
