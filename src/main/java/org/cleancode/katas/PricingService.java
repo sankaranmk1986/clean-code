@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PricingService {
 
@@ -16,20 +17,42 @@ public class PricingService {
 	}
 
 	public List<List<Promotion>> calculateEligiblePromotionCombinations(Map<String, Integer> productCountMap) {
-		return getEligiblePromotions(productCountMap).stream()//
-				.map(promotion ->calculateEligiblePromotionCombinations(promotion, new HashMap<>(productCountMap)))//
-				.collect(toList());
+		return calculateEligiblePromotionCombinations(productCountMap, new ArrayList<>());
 	}
 
-	private List<Promotion> calculateEligiblePromotionCombinations(Promotion promotion, Map<String, Integer> productCountMap) {
-		adjustProductCount(promotion, productCountMap);
-		List<Promotion> promotions = new ArrayList<>();
+	private List<List<Promotion>> calculateEligiblePromotionCombinations(Map<String, Integer> productCountMap,
+			List<Promotion> appliedPromotions) {
+		List<List<Promotion>> promotionCombinations = new ArrayList<>();
+		addAppliedPromotionsFirstTime(appliedPromotions, promotionCombinations);
+		determineEligiblePromotionCombination(productCountMap, appliedPromotions, promotionCombinations);
+		return promotionCombinations;
+	}
+
+	private void determineEligiblePromotionCombination(Map<String, Integer> productCountMap,
+			List<Promotion> appliedPromotions, List<List<Promotion>> promotionCombinations) {
+		List<Promotion> originalAppliedPromotions = new ArrayList<>(appliedPromotions);
+		AtomicInteger eligiblePromotionsCount = new AtomicInteger(0);
 		getEligiblePromotions(productCountMap).stream()//
 				.forEach(eligiblePromotion -> {//
-					promotions.addAll(calculateEligiblePromotionCombinations(eligiblePromotion, new HashMap<>(productCountMap)));
+					Map<String, Integer> originalProductCountMap = new HashMap<>(productCountMap);
+					adjustProductCount(eligiblePromotion, originalProductCountMap);
+					List<Promotion> promotions = appliedPromotions;
+					if (eligiblePromotionsCount.getAndIncrement() > 0) {
+						promotions = new ArrayList<>(originalAppliedPromotions);
+						promotionCombinations.add(promotions);
+					}
+					promotions.add(eligiblePromotion);
+					promotionCombinations
+							.addAll(calculateEligiblePromotionCombinations(originalProductCountMap, promotions));
+
 				});
-		promotions.add(promotion);
-		return promotions;
+	}
+
+	private void addAppliedPromotionsFirstTime(List<Promotion> appliedPromotions,
+			List<List<Promotion>> promotionCombinations) {
+		if (appliedPromotions.isEmpty()) {
+			promotionCombinations.add(appliedPromotions);
+		}
 	}
 
 	private void adjustProductCount(Promotion promotion, Map<String, Integer> productCountMap) {
