@@ -70,6 +70,14 @@ public class PricingServiceShould {
 		assertThat(pricingService.calculatePrice(productCountMap),is(70));
 	}
 	
+	@Test
+    public void product_2A_product_2B_costs_140(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 2);
+		productCountMap.put("B", 2);
+		assertThat(pricingService.calculatePrice(productCountMap),is(140));
+	}
+	
 	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
 		StringBuilder productNameCombinationBuilder = new StringBuilder();
 		combinationOfPromotions.stream().forEach(appliedPromotions -> {
