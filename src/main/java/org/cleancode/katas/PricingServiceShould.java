@@ -80,6 +80,23 @@ public class PricingServiceShould {
 		assertThat(pricingService.calculateMinimumPrice(productCountMap),is(140));
 	}
 	
+	@Test
+    public void product_3A_product_4B_costs_220(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 3);
+		productCountMap.put("B", 4);
+		assertThat(pricingService.calculateMinimumPrice(productCountMap),is(220));
+	}
+	
+	@Test
+    public void product_3A_product_4B_product_2C_costs_260(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 3);
+		productCountMap.put("B", 4);
+		productCountMap.put("C", 2);
+		assertThat(pricingService.calculateMinimumPrice(productCountMap),is(260));
+	}
+	
 	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
 		StringBuilder productNameCombinationBuilder = new StringBuilder();
 		combinationOfPromotions.stream().forEach(appliedPromotions -> {
