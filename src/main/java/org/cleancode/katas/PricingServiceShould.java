@@ -92,6 +92,16 @@ public class PricingServiceShould {
 		assertThat(getPromotionsAsString(promotions), is("AB_AB_or_B"));
 	}
 	
+	@Test
+	public void return_all_possible_combination_if_3A_2B_C_purchased(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 3);
+		productCountMap.put("B", 2);
+		productCountMap.put("C", 1);
+		List<List<Promotion>> promotions = pricingService.calculateEligiblePromotionCombinations(productCountMap);
+		assertThat(promotions.size(), is(7));
+	}
+	
 	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
 		StringBuilder productNameCombinationBuilder = new StringBuilder();
 		combinationOfPromotions.stream().forEach(appliedPromotions -> {
