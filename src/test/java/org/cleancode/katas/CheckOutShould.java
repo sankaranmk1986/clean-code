@@ -42,7 +42,9 @@ public class CheckOutShould {
 		        {"CDBA",105},
 		        {"BABAA",175},
 		        {"AAAAAA",260},
-		        {"DABABA",190}
+		        {"DABABA",190},
+		        {"ABBCAB",185},
+		        {"BCBA",115}
 		      });
 		  }
 		
@@ -91,7 +93,9 @@ public class CheckOutShould {
 		        {asList("B","B"), 45},
 		        {asList("A","A","A","B","B"), 175},
 		        {asList("A","A","A","A","A","A"), 260},
-		        {asList("D","A","B","A","B","A"), 190}
+		        {asList("D","A","B","A","B","A"), 190},
+		        {asList("D","A","B","B","C","A"), 175},
+		        {asList("A","A","A","B","B","B","B"), 220}
 		      });
 		  }
 		
