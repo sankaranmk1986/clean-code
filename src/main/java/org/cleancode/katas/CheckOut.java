@@ -8,8 +8,8 @@ public class CheckOut {
 	
 	private Cart cart;
 
-	public CheckOut(List<Product> availableProducts) {
-		cart = new Cart(availableProducts);
+	public CheckOut(List<Product> availableProducts, List<Promotion> availablePromotions) {
+		cart = new Cart(availableProducts,availablePromotions);
 	}
 
 	public int price(String products) {

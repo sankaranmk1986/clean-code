@@ -4,7 +4,6 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,11 +35,11 @@ public class CheckOutShould {
 		        {"A", 50},
 		        {"B", 30},
 		        {"AB", 70},
-		        {"ABA", 130},
+		        {"ABA", 120},
 		        {"AAA", 130},
 		        {"AAAA", 180},
 		        {"BB", 45},
-		        {"CDBA",115},
+		        {"CDBA",105},
 		        {"BABAA",175},
 		        {"AAAAAA",260},
 		        {"DABABA",190}
@@ -49,16 +48,17 @@ public class CheckOutShould {
 		
 		@Before
 		public void setup(){
-			List<Discount> discounts = new ArrayList<>();
-			discounts.add(new Discount(3, 130));
-			List<Product> products = new ArrayList<Product>();
-			products.add(new Product("A", 50, discounts));
-			discounts = new ArrayList<>();
-			discounts.add(new Discount(2, 45));
-			products.add(new Product("B", 30, discounts));
-			products.add(new Product("C", 20));
-			products.add(new Product("D", 15));
-			checkOut = new CheckOut(products);
+			Product productA= new Product("A", 50);
+			Product productB = new Product("B", 30);
+			Product productC = new Product("C", 20);
+			Product productD = new Product("D", 15);
+			List<Product> availableProducts = asList(productA, productB, productC, productD);
+			List<Promotion> availablePromotions = asList(new Promotion(asList( new ProductPromotionDetails(productA, 1),
+					new ProductPromotionDetails(productB, 1)), 70),
+					new Promotion(asList( new ProductPromotionDetails(productB, 1),	new ProductPromotionDetails(productC, 1)), 45),
+					new Promotion(asList( new ProductPromotionDetails(productA, 3)),130),
+					new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45));
+			checkOut = new CheckOut(availableProducts,availablePromotions);
 		}
 		
 		@Test
@@ -87,7 +87,7 @@ public class CheckOutShould {
 		        {asList("A","A"), 100},
 		        {asList("A","A", "A"), 130},
 		        {asList("A","A", "A", "A"), 180},
-		        {asList("A","B", "C", "D"), 115},
+		        {asList("A","B", "C", "D"), 105},
 		        {asList("B","B"), 45},
 		        {asList("A","A","A","B","B"), 175},
 		        {asList("A","A","A","A","A","A"), 260},
@@ -97,16 +97,17 @@ public class CheckOutShould {
 		
 		@Before
 		public void setup(){
-			List<Discount> discounts = new ArrayList<>();
-			discounts.add(new Discount(3, 130));
-			List<Product> products = new ArrayList<Product>();
-			products.add(new Product("A", 50, discounts));
-			discounts = new ArrayList<>();
-			discounts.add(new Discount(2, 45));
-			products.add(new Product("B", 30, discounts));
-			products.add(new Product("C", 20));
-			products.add(new Product("D", 15));
-			checkOut = new CheckOut(products);
+			Product productA= new Product("A", 50);
+			Product productB = new Product("B", 30);
+			Product productC = new Product("C", 20);
+			Product productD = new Product("D", 15);
+			List<Product> availableProducts = asList(productA, productB, productC, productD);
+			List<Promotion> availablePromotions = asList(new Promotion(asList( new ProductPromotionDetails(productA, 1),
+					new ProductPromotionDetails(productB, 1)), 70),
+					new Promotion(asList( new ProductPromotionDetails(productB, 1),	new ProductPromotionDetails(productC, 1)), 45),
+					new Promotion(asList( new ProductPromotionDetails(productA, 3)),130),
+					new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45));
+			checkOut = new CheckOut(availableProducts,availablePromotions);
 		}
 		
 		@Test

@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 public class Cart {
 	
 	private Map<String, Product> productNameMap;
+	private PricingService pricingService;
 
-	public Cart(List<Product> availableProducts) {
+	public Cart(List<Product> availableProducts, List<Promotion> availablePromotions) {
 		productNameMap = availableProducts.stream().collect(Collectors.toMap(Product::getProductName, product->product));
+		pricingService = new PricingService(availablePromotions, availableProducts);
 	} 
 	
 	private List<Product> productsInCart = new ArrayList<Product>();
@@ -26,10 +28,7 @@ public class Cart {
 	}
 	
 	private int calculatePrice() {
-		Map<String, Integer> productCountMap = countProducts();
-		return productCountMap.keySet()
-				.stream()
-				.mapToInt(product -> productNameMap.get(product).calculatePrice(productCountMap.get(product))).sum();
+		return pricingService.calculateMinimumPrice(countProducts());
 	}
 	
 	private Map<String, Integer> countProducts() {
