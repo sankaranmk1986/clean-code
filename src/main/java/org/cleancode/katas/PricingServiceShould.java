@@ -62,6 +62,14 @@ public class PricingServiceShould {
 		assertThat(promotions.size(), is(7));
 	}
 	
+	@Test
+    public void product_A_product_B_costs_70(){
+		Map<String, Integer> productCountMap = new HashMap<>();
+		productCountMap.put("A", 1);
+		productCountMap.put("B", 1);
+		assertThat(pricingService.calculatePrice(productCountMap),is(70));
+	}
+	
 	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
 		StringBuilder productNameCombinationBuilder = new StringBuilder();
 		combinationOfPromotions.stream().forEach(appliedPromotions -> {
@@ -86,5 +94,4 @@ public class PricingServiceShould {
 		promotionDetails.stream().forEach(productName -> {productNameCombinationBuilder.append(productName);});
 		return productNameCombinationBuilder.toString();
 	}
-
 }
