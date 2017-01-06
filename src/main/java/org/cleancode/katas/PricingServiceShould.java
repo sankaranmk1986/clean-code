@@ -22,11 +22,13 @@ public class PricingServiceShould {
 		Product productA = new Product("A", 50);
 		Product productB = new Product("B", 30);
 		Product productC = new Product("C", 20);
-		pricingService = new PricingService(asList(new Promotion(asList( new ProductPromotionDetails(productA, 1),
+		List<Promotion> availablePromotions = asList(new Promotion(asList( new ProductPromotionDetails(productA, 1),
 				new ProductPromotionDetails(productB, 1)), 70),
 				new Promotion(asList( new ProductPromotionDetails(productB, 1),	new ProductPromotionDetails(productC, 1)), 45),
 				new Promotion(asList( new ProductPromotionDetails(productA, 3)),130),
-				new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45)));
+				new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45));
+		List<Product> availableProducts = asList(productA, productB, productC);
+		pricingService = new PricingService(availablePromotions, availableProducts);
 	}
 	
 	
@@ -67,7 +69,7 @@ public class PricingServiceShould {
 		Map<String, Integer> productCountMap = new HashMap<>();
 		productCountMap.put("A", 1);
 		productCountMap.put("B", 1);
-		assertThat(pricingService.calculatePrice(productCountMap),is(70));
+		assertThat(pricingService.calculateMinimumPrice(productCountMap),is(70));
 	}
 	
 	@Test
@@ -75,7 +77,7 @@ public class PricingServiceShould {
 		Map<String, Integer> productCountMap = new HashMap<>();
 		productCountMap.put("A", 2);
 		productCountMap.put("B", 2);
-		assertThat(pricingService.calculatePrice(productCountMap),is(140));
+		assertThat(pricingService.calculateMinimumPrice(productCountMap),is(140));
 	}
 	
 	private String getPromotionsAsString(List<List<Promotion>> combinationOfPromotions){
