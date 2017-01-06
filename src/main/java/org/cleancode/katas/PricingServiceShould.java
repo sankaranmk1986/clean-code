@@ -29,46 +29,6 @@ public class PricingServiceShould {
 				new Promotion(asList( new ProductPromotionDetails(productB, 2)), 45)));
 	}
 	
-	@Test
-	public void return_promotion_if_A_B_purchased(){
-		Map<String, Integer> productCountMap = new HashMap<>();
-		productCountMap.put("A", 1);
-		productCountMap.put("B", 1);
-		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
-		assertThat(promotions.size(), is(1));
-		assertThat(promotions.get(0).getDiscountedPrice(), is(70));
-	}
-	
-	@Test
-	public void return_3_promotions_if_A_2B_C_purchased(){
-		Map<String, Integer> productCountMap = new HashMap<>();
-		productCountMap.put("A", 1);
-		productCountMap.put("B", 2);
-		productCountMap.put("C", 1);
-		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
-		assertThat(promotions.size(), is(3));
-		assertThat(promotions.get(0).getDiscountedPrice()
-				+promotions.get(1).getDiscountedPrice()+promotions.get(2).getDiscountedPrice(), is(160));
-	}
-	
-	@Test
-	public void return_4_promotions_if_3A_2B_C_purchased(){
-		Map<String, Integer> productCountMap = new HashMap<>();
-		productCountMap.put("A", 3);
-		productCountMap.put("B", 2);
-		productCountMap.put("C", 1);
-		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
-		assertThat(promotions.size(), is(4));
-	}
-	
-	@Test
-	public void return_0_promotions_if_A_C_purchased(){
-		Map<String, Integer> productCountMap = new HashMap<>();
-		productCountMap.put("A", 1);
-		productCountMap.put("C", 1);
-		List<Promotion> promotions = pricingService.getEligiblePromotions(productCountMap);
-		assertThat(promotions.size(), is(0));
-	}
 	
 	@Test
 	public void return_AB_as_eligible_combination_if_A_B_purchased(){
